@@ -57,6 +57,6 @@
 
 
 	}
-	echo "</table> <br> Test";
+	echo "</table>";
 
 ?>
