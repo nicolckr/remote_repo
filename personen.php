@@ -25,6 +25,7 @@
 			
 			echo "<h1>Informationen</h1><br>
 
+			ID:".$satz['p_id']."<br>
 			Name:".$satz['p_name']."<br>
 			Vorname:".$satz['p_vname']."<br>
 			User:".$satz['p_user']."<br>
