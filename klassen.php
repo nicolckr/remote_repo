@@ -4,12 +4,12 @@
 
 	if(isset($_GET['k_id']) && isset($_GET['action']))
 	{
-		echo $_GET['k_id'];
-		echo $_GET['action'];
+		//echo $_GET['k_id'];
+		//echo $_GET['action'];
 		if($_GET['action']=="delete")
 		{
 			$sql="delete from klassen where k_id = ".$_GET['k_id'];
-			echo "<br>".$sql;
+			//echo "<br>".$sql;
 			$result = mysqli_query($db, $sql);
 			header("Location: ?page=klassen");
 		}
@@ -57,6 +57,6 @@
 
 
 	}
-	echo "</table> <br> Test";
+	echo "</table>";
 
 ?>
