@@ -80,6 +80,6 @@
 
 
 	}
-	echo "</table> hallo";
+	echo "</table>";
 
 ?>
