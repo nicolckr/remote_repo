@@ -1,3 +1,10 @@
+<html>
+	<head>
+		<link rel="stylesheet" href="css/formate.css">
+	</head>
+	
+	<body>
+
 <h3>
   Lorem ipsum dolor sit amet, consetetur sadipscing elitr,
   sed diam nonumy eirmod tempor invidunt ut labore et dolore magna
@@ -9,3 +16,6 @@
   eos et accusam et justo duo dolores et ea rebum. Stet clita kasd
   gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
 </h1>
+
+  </body>
+</html>

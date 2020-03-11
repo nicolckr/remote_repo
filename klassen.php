@@ -1,3 +1,10 @@
+<html>
+	<head>
+		<link rel="stylesheet" href="css/formate.css">
+	</head>
+	
+	<body>
+
 <?php
 
 	require_once('config/db.php');				//Fügt hier den Inhalt der Datei db.php ein
@@ -60,3 +67,6 @@
 	echo "</table>";
 
 ?>
+
+	</body>
+</html>

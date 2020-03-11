@@ -1,3 +1,10 @@
+<html>
+	<head>
+		<link rel="stylesheet" href="css/formate.css">
+	</head>
+	
+	<body>
+
 <?php
 
 	require_once('config/db.php');
@@ -23,11 +30,19 @@
 			$satz = mysqli_fetch_array($result,MYSQLI_ASSOC);
 
 			echo "<h1>Informationen</h1><br>
+			
+			<table>
+				<tr>
+					<td><u>Bildungsgang:</u></td>
+					<td><b>".$satz['bg_name']."</b></td>
+				</tr>
+				<tr>
+					<td align=right>Klassen:</td>
+					<td>".$satz['k_name']."</td>
+				</tr>
+			</table>";
+			
 
-			<u>Bildungsgang:</u> <b>".$satz['bg_name']."</b><br><br>
-			Klassen: ".$satz['k_name'];
-			
-			
 			/*
 			while($satz = mysqli_fetch_array($result, MYSQLI_ASSOC))
 			{
@@ -68,3 +83,5 @@
 	echo "</table>";
 
 ?>
+	</body>
+</html>
