@@ -24,8 +24,17 @@
 
 			echo "<h1>Informationen</h1><br>
 
-			Bildungsgang: ".$satz['bg_name']."<br>
-			Klasse: ".$satz['k_name']."<br>";
+			<u>Bildungsgang:</u> <b>".$satz['bg_name']."</b><br><br>
+			Klassen: ".$satz['k_name'];
+			
+			
+			/*
+			while($satz = mysqli_fetch_array($result, MYSQLI_ASSOC))
+			{
+				echo $satz['k_name'];
+			}
+			echo"<br>";
+			*/
 		}
 	}
 
