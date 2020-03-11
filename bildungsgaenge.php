@@ -8,10 +8,24 @@
 		//echo $_GET['action'];
 		if($_GET['action']=="delete")
 		{
-			$sql="delete from bildungsgaenge where bg_id = ".$_GET['bg_id'];
+			$sql="DELETE from bildungsgaenge where bg_id = ".$_GET['bg_id'];
 			//echo $sql;
 			$result = mysqli_query($db, $sql);
 			header("Location: ?page=bildungsgaenge");
+		}
+		else if ($_GET['action']=="view")
+		{
+			$sql="SELECT *
+				  from bildungsgaenge right join klassen using(bg_id)
+				  where bg_id = ".$_GET['bg_id'];
+
+			$result = mysqli_query($db, $sql);
+			$satz = mysqli_fetch_array($result,MYSQLI_ASSOC);
+
+			echo "<h1>Informationen</h1><br>
+
+			Bildungsgang: ".$satz['bg_name']."<br>
+			Klasse: ".$satz['k_name']."<br>";
 		}
 	}
 
@@ -35,7 +49,7 @@
 				<td>".$satz['bg_id']."</td>
 				<td>".$satz['bg_name']."</td>
 				<td>
-					<a href='?action=view&bg_id=".$satz['bg_id']."'><img src='icons/view.png' width=15></a>
+					<a href='?page=bildungsgaenge&action=view&bg_id=".$satz['bg_id']."'><img src='icons/view.png' width=15></a>
 					<a href='?action=edit&bg_id=".$satz['bg_id']."'><img src='icons/bearbeiten.png' width=15></a>
 					<a href='?page=bildungsgaenge&action=delete&bg_id=".$satz['bg_id']."'><img src='icons/loeschen.png' width=15></a>
 				</td>
