@@ -31,15 +31,38 @@
 			$satz = mysqli_fetch_array($result,MYSQLI_ASSOC);
 			
 			echo "<h1>Informationen</h1><br>
-
-			ID:".$satz['p_id']."<br>
-			Name:".$satz['p_name']."<br>
-			Vorname:".$satz['p_vname']."<br>
-			User:".$satz['p_user']."<br>
-			E-Mail:".$satz['p_mail']."<br>
-			Klasse:".$satz['k_name']."<br>
-			Bildungsgang:".$satz['bg_name']."<br>";
 			
+			<table>
+				<tr>
+					<td align=right>ID:</td>
+					<td>".$satz['p_id']."</td>
+				</tr>
+				<tr>
+					<td align=right>Name:</td>
+					<td>".$satz['p_name']."</td>
+				</tr>
+				<tr>
+					<td align=right>Vorname:</td>
+					<td>".$satz['p_vname']."</td>
+				</tr>
+				<tr>
+					<td align=right>User:</td>
+					<td>".$satz['p_user']."</td>
+				</tr>
+				<tr>
+					<td align=right>E-Mail:</td>
+					<td>".$satz['p_mail']."</td>
+				</tr>
+				<tr>
+					<td align=right>Klasse:</td>
+					<td>".$satz['k_name']."</td>
+				</tr>
+				<tr>
+					<td align=right>Bildungsgang:</td>
+					<td>".$satz['bg_name']."</td>
+				</tr>
+			</table>";
+
 		}
 	}
 	$sql = "SELECT * from personen left join klassen using(k_id) left join bildungsgaenge using(bg_id) order by p_name";
