@@ -66,7 +66,14 @@
 		{
 			if(isset($_POST['bg_name']))
 			{
-				echo $_POST['bg_name'];
+				$sql = "UPDATE bildungsgaenge
+						SET bg_name='".$_POST['bg_name']."'
+						WHERE bg_id = ".$_GET['bg_id'];
+
+				$res = mysqli_query($db, $sql);
+
+				echo "<br><br>Bildungsgänge geändert: ".mysqli_affected_rows($db)."<br>";
+				echo "<a href='?page=bildungsgaenge'>Zurück zu den Bildungsgängen</a>";
 			}
 			else
 			{
