@@ -52,6 +52,49 @@
 			echo"<br>";
 			*/
 		}
+		else if($_GET['action']=="edit")
+		{
+			if(isset($_POST['bg_name']))
+			{
+				$sql = "UPDATE klassen
+						SET bg_id ='".$_POST['bg_name']."'
+						WHERE k_id = ".$_GET['k_id'];
+			
+				$res = mysqli_query($db, $sql);
+
+				echo "<br><br>Bildungsgänge geändert: ".mysqli_affected_rows($db)."<br>";
+				echo "<a href='?page=klassen'>Zurück zu den Klassen</a>";
+			}
+			else
+			{
+				$sql1 ="SELECT * FROM klassen
+						WHERE k_id = ".$_GET['k_id'];
+					
+				$result1 = mysqli_query($db, $sql1);
+				$feld = mysqli_fetch_array($result1,MYSQLI_ASSOC);
+
+				$sql = "SELECT *
+						from bildungsgaenge";
+						
+
+				$result = mysqli_query($db, $sql);
+				$data = mysqli_fetch_all($result,MYSQLI_ASSOC);
+
+				echo"
+				<h2>Bildungsgang der ausgewählten Klasse bearbeiten: <i>".$feld['k_name']."</i></h2>
+
+				<form method='POST'>
+					<label for='bildungsgang'>Bildungsgang</label>
+					<select id='bildungsgang' name='bg_name'>";
+				
+					foreach($data as $satz)
+					{
+						echo"<option value='".$satz['bg_name']."'>".$satz['bg_name']."</option>";
+					}
+					echo "<input type='submit' value='Speichern'>
+				</form>";
+			}
+		}
 	}
 	else
 	{
