@@ -52,47 +52,68 @@
 			echo"<br>";
 			*/
 		}
-		else if($_GET['action']=="edit")
+		elseif($_GET['action']=="edit")
 		{
-			if(isset($_POST['bg_name']))
+			if(isset($_POST['k_name']))
 			{
-				$sql = "UPDATE klassen
-						SET bg_id ='".$_POST['bg_name']."'
-						WHERE k_id = ".$_GET['k_id'];
-			
-				$res = mysqli_query($db, $sql);
-
-				echo "<br><br>Bildungsgänge geändert: ".mysqli_affected_rows($db)."<br>";
-				echo "<a href='?page=klassen'>Zurück zu den Klassen</a>";
+				//print_r($_POST);
+				$sql="update klassen
+					  set k_name='".$_POST['k_name']."',
+					      bg_id = ".$_POST['bg_id']."
+					  where k_id=".$_GET['k_id'] ;
+				//echo $sql;
+				$res=mysqli_query($db,$sql);
+				echo "<br><br>Klassen geändert: ".mysqli_affected_rows($db)."<br>";
+				echo"<a href='?page=klassen'>zurück zu den Klassen</a>";
 			}
 			else
 			{
-				$sql1 ="SELECT * FROM klassen
-						WHERE k_id = ".$_GET['k_id'];
-					
-				$result1 = mysqli_query($db, $sql1);
-				$feld = mysqli_fetch_array($result1,MYSQLI_ASSOC);
-
-				$sql = "SELECT *
-						from bildungsgaenge";
-						
-
-				$result = mysqli_query($db, $sql);
-				$data = mysqli_fetch_all($result,MYSQLI_ASSOC);
-
-				echo"
-				<h2>Bildungsgang der ausgewählten Klasse bearbeiten: <i>".$feld['k_name']."</i></h2>
-
-				<form method='POST'>
-					<label for='bildungsgang'>Bildungsgang</label>
-					<select id='bildungsgang' name='bg_name'>";
+				$sql="	SELECT klassen.*				
+						from klassen				
+						where k_id = ".$_GET['k_id'];
 				
-					foreach($data as $satz)
-					{
-						echo"<option value='".$satz['bg_name']."'>".$satz['bg_name']."</option>";
-					}
-					echo "<input type='submit' value='Speichern'>
-				</form>";
+				//echo $sql;
+				$result = mysqli_query($db, $sql);
+				$data = mysqli_fetch_assoc($result);
+				
+				$sql2="	SELECT bildungsgaenge.*				
+						from bildungsgaenge
+						order by bg_name";
+				
+				//echo $sql;
+				$result2 = mysqli_query($db, $sql2);
+				$bgs = mysqli_fetch_all($result2, MYSQLI_ASSOC); 
+				//print_r($bgs);
+				//Formular
+				echo "<h3> Klasse bearbeiten: <i> ".$data['k_name']."<i></h3>";	
+				echo "<hr>";
+				echo "<form method=post>
+						
+						<table>
+							<tr>
+								<td>Bezeichnung:</td>
+								<td> <input type='text' name='k_name' value='".$data['k_name']."' size=50></td>
+							</tr>
+							<tr>
+								<td>Bildungsgang:</td>
+								<td><select name='bg_id'>";       
+								foreach ($bgs as $bg)
+								{
+									if($bg['bg_id']==$data['bg_id'])
+									{
+										echo "<option selected value='".$bg['bg_id']."'>".$bg['bg_name']."</option>";
+									}
+									else
+									{
+										echo "<option value='".$bg['bg_id']."'>".$bg['bg_name']."</option>";
+									}
+								}
+
+				echo "			</select> </td>
+							</tr>
+						</table>
+						<input type='submit' value='Speichern'>
+					</form>";
 			}
 		}
 	}
