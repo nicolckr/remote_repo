@@ -67,6 +67,90 @@
 
 			<a href='?page=personen'>Zurück zu allen Personen</a> ";
 		}
+		elseif($_GET['action']=="edit")
+		{
+			if(isset($_POST['p_name']))
+			{
+				$sql="UPDATE personen
+					  SET p_name='".$_POST['p_name']."',
+					  	  p_vname='".$_POST['p_vname']."',
+						  p_user='".$_POST['p_user']."',
+						  p_mail='".$_POST['p_mail']."',
+						  p_pass='".$_POST['p_pass']."',
+					      k_id ='".$_POST['k_id']."'
+					  WHERE p_id=".$_GET['p_id'];
+				
+				$res=mysqli_query($db,$sql);
+				echo "<br><br>Personen geändert: ".mysqli_affected_rows($db)."<br>";
+				echo"<a href='?page=personen'>zurück zu den Personen</a>";
+			}
+			else
+			{
+				//SQL-Abfragen
+				$sql="	SELECT personen.*				
+						FROM personen				
+						WHERE p_id = ".$_GET['p_id'];
+				
+				$result = mysqli_query($db, $sql);
+				$data = mysqli_fetch_assoc($result);
+				
+
+				$sql2="	SELECT klassen.*				
+						FROM klassen
+						ORDER BY k_name";
+				
+				$result2 = mysqli_query($db, $sql2);
+				$kls = mysqli_fetch_all($result2, MYSQLI_ASSOC); 
+				
+
+				//Formular
+				echo "<h3> Person bearbeiten: <i> ".$data['p_vname']." ".$data['p_name']."<i></h3>";	
+				echo "<hr>";
+				echo "<form method=post>
+						
+						<table>
+							<tr>
+								<td>Nachname:</td>
+								<td><input type='text' name='p_name' value='".$data['p_name']."' size=30></td>
+							</tr>
+							<tr>
+								<td>Vorname:</td>
+								<td><input type='text' name='p_vname' value='".$data['p_vname']."' size=30></td>
+							</tr>
+							<tr>
+								<td>User:</td>
+								<td><input type='text' name='p_user' value='".$data['p_user']."' size=30></td>
+							</tr>
+							<tr>
+								<td>E-Mail:</td>
+								<td><input type='text' name='p_mail' value='".$data['p_mail']."' size=30></td>
+							</tr>
+							<tr>
+								<td>Passwort:</td>
+								<td><input type='pass' name='p_pass' value='".$data['p_pass']."' size=30></td>
+							</tr>
+							<tr>
+								<td>Klasse:</td>
+								<td><select name='k_id'>";       
+								foreach ($kls as $kl)
+								{
+									if($kl['k_id']==$data['k_id'])
+									{
+										echo "<option selected value='".$kl['k_id']."'>".$kl['k_name']."</option>";
+									}
+									else
+									{
+										echo "<option value='".$kl['k_id']."'>".$kl['k_name']."</option>";
+									}
+								}
+
+				echo "			</select> </td>
+							</tr>
+						</table>
+						<input type='submit' value='Speichern'>
+					</form>";
+			}
+		}
 	}
 	else
 	{

@@ -56,34 +56,34 @@
 		{
 			if(isset($_POST['k_name']))
 			{
-				//print_r($_POST);
-				$sql="update klassen
-					  set k_name='".$_POST['k_name']."',
-					      bg_id = ".$_POST['bg_id']."
-					  where k_id=".$_GET['k_id'] ;
-				//echo $sql;
+				$sql="UPDATE klassen
+					  SET k_name='".$_POST['k_name']."',
+					      bg_id ='".$_POST['bg_id']."'
+					  WHERE k_id=".$_GET['k_id'];
+
 				$res=mysqli_query($db,$sql);
 				echo "<br><br>Klassen geändert: ".mysqli_affected_rows($db)."<br>";
 				echo"<a href='?page=klassen'>zurück zu den Klassen</a>";
 			}
 			else
 			{
+				//SQL-Abfragen
 				$sql="	SELECT klassen.*				
-						from klassen				
-						where k_id = ".$_GET['k_id'];
+						FROM klassen				
+						WHERE k_id = ".$_GET['k_id'];
 				
-				//echo $sql;
 				$result = mysqli_query($db, $sql);
 				$data = mysqli_fetch_assoc($result);
 				
+
 				$sql2="	SELECT bildungsgaenge.*				
-						from bildungsgaenge
-						order by bg_name";
+						FROM bildungsgaenge
+						ORDER BY bg_name";
 				
-				//echo $sql;
 				$result2 = mysqli_query($db, $sql2);
 				$bgs = mysqli_fetch_all($result2, MYSQLI_ASSOC); 
-				//print_r($bgs);
+
+
 				//Formular
 				echo "<h3> Klasse bearbeiten: <i> ".$data['k_name']."<i></h3>";	
 				echo "<hr>";
@@ -92,7 +92,7 @@
 						<table>
 							<tr>
 								<td>Bezeichnung:</td>
-								<td> <input type='text' name='k_name' value='".$data['k_name']."' size=50></td>
+								<td> <input type='text' name='k_name' value='".$data['k_name']."' size=10></td>
 							</tr>
 							<tr>
 								<td>Bildungsgang:</td>
