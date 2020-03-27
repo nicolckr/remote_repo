@@ -1,3 +1,23 @@
+<script>
+document.addEventListener('DOMContentLoaded', function ()
+{
+	document.querySelector('#check').addEventListener('click', function ()
+	{
+		if(document.getElementById('p_pass').type == 'password')
+		{
+			document.getElementById('p_pass').type == 'text';
+			this.innerText = 'Passwort verstecken';
+		}
+		else
+		{
+			document.getElementById('p_pass').type = 'password';
+			this.innerText = 'Passwort sichtbar machen';
+		}
+	});
+});
+</script>
+
+
 <html>
 	<head>
 		<meta charset="utf-8">
@@ -76,9 +96,12 @@
 					  	  p_vname='".$_POST['p_vname']."',
 						  p_user='".$_POST['p_user']."',
 						  p_mail='".$_POST['p_mail']."',
-						  p_pass='".$_POST['p_pass']."',
-					      k_id ='".$_POST['k_id']."'
-					  WHERE p_id=".$_GET['p_id'];
+						  k_id =".$_POST['k_id'];
+				if($_POST['p_pass']<>"Dein Passwort")
+				{
+					$sql.=",p_pass=md5('".$_POST['p_pass']."')";
+				}
+				$sql.="WHERE p_id=".$_GET['p_id'];
 				
 				$res=mysqli_query($db,$sql);
 				echo "<br><br>Personen geändert: ".mysqli_affected_rows($db)."<br>";
@@ -127,7 +150,10 @@
 							</tr>
 							<tr>
 								<td>Passwort:</td>
-								<td><input type='pass' name='p_pass' value='".$data['p_pass']."' size=30></td>
+								<td>
+									<input type='password' name='p_pass' id='p_pass' required autocomplete='off' minlength=8 maxlength=20 value='Dein Passwort' size=30>
+									<button id='check' type='button'>Passwort sichtbar machen</button>
+								</td>
 							</tr>
 							<tr>
 								<td>Klasse:</td>
