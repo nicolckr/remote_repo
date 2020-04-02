@@ -10,18 +10,18 @@
 
 	require_once('config/db.php');
 
-	if(isset($_GET['bg_id']) && isset($_GET['action']))
+	if(isset($_GET['action']))
 	{
 		//echo $_GET['bg_id'];
 		//echo $_GET['action'];
-		if($_GET['action']=="delete")
+		if($_GET['action']=="delete" and isset($_GET['bg_id']))
 		{
 			$sql="DELETE from bildungsgaenge where bg_id = ".$_GET['bg_id'];
 			//echo $sql;
 			$result = mysqli_query($db, $sql);
 			header("Location: ?page=bildungsgaenge");
 		}
-		else if ($_GET['action']=="view")
+		else if ($_GET['action']=="view" and isset($_GET['bg_id']))
 		{
 			$sql="SELECT *
 				  from bildungsgaenge left join klassen using(bg_id)
@@ -62,7 +62,7 @@
 			echo"<br>";
 			*/
 		}
-		else if($_GET['action']=="edit")
+		else if($_GET['action']=="edit" and isset($_GET['bg_id']))
 		{
 			if(isset($_POST['bg_name']))
 			{
@@ -91,6 +91,36 @@
 					<input type='submit' value='Speichern'>
 				</form>";
 			}
+		}
+
+		elseif($_GET['action']=="add")
+		{
+			if(isset($_POST['bg_name']))
+			{
+				$name = $_POST['bg_name'];
+	
+				$sql = "INSERT INTO bildungsgaenge (bg_name)
+						VALUES ('$name')";
+				
+				$res = mysqli_query($db,$sql);
+				echo "<br><br>Bildungsgang angelegt: ".mysqli_affected_rows($db)."<br>";
+				echo"<a href='?page=bildungsgaenge'>zurück zu den Bildungsgängen</a>";
+	
+			}
+			else
+			{
+				echo "<h3>Neuen Bildungsgang anlegen</h3>";	
+					echo "<hr>";
+					echo "<form method=post>
+							<table>
+								<tr>
+									<td>Bezeichnung:</td>
+									<td><input type='text' name='bg_name' size=30></td>
+								</tr>
+							</table>
+							<input type='submit' value='Speichern'>";
+					echo "</form>";	
+			}	
 		}
 	}
 	else
@@ -121,7 +151,8 @@
 					</td>
 				</tr>";
 		}
-		echo "</table>";
+		echo "</table><br>";
+		echo "<a href='?page=bildungsgaenge&action=add'><button type='button'>Neuer Bildungsgang</button></a>";
 	}
 ?>
 	</body>

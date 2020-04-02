@@ -9,18 +9,18 @@
 
 	require_once('config/db.php');				//Fügt hier den Inhalt der Datei db.php ein
 
-	if(isset($_GET['k_id']) && isset($_GET['action']))
+	if(isset($_GET['action']))
 	{
 		//echo $_GET['k_id'];
 		//echo $_GET['action'];
-		if($_GET['action']=="delete")
+		if($_GET['action']=="delete" and isset($_GET['k_id']))
 		{
 			$sql="delete from klassen where k_id = ".$_GET['k_id'];
 			//echo "<br>".$sql;
 			$result = mysqli_query($db, $sql);
 			header("Location: ?page=klassen");
 		}
-		else if ($_GET['action']=="view")
+		else if ($_GET['action']=="view" and isset($_GET['k_id']))
 		{
 			$sql="SELECT *
 				  from klassen left join personen using(k_id)
@@ -52,13 +52,13 @@
 			echo"<br>";
 			*/
 		}
-		elseif($_GET['action']=="edit")
+		elseif($_GET['action']=="edit" and isset($_GET['k_id']))
 		{
 			if(isset($_POST['k_name']))
 			{
 				$sql="UPDATE klassen
-					  SET k_name='".$_POST['k_name']."',
-					      bg_id ='".$_POST['bg_id']."'
+					    SET k_name='".$_POST['k_name']."',
+					      	bg_id ='".$_POST['bg_id']."'
 					  WHERE k_id=".$_GET['k_id'];
 
 				$res=mysqli_query($db,$sql);
@@ -116,6 +116,61 @@
 					</form>";
 			}
 		}
+
+		elseif($_GET['action']=="add")
+		{
+			if(isset($_POST['k_name']))
+			{
+				$name = $_POST['k_name'];
+				$bg_id = $_POST['bg_id'];
+	
+				$sql = "INSERT INTO klassen (bg_id, k_name)
+						VALUES ($bg_id, '$name')";
+				
+				$res = mysqli_query($db,$sql);
+				echo "<br><br>Klasse angelegt: ".mysqli_affected_rows($db)."<br>";
+				echo"<a href='?page=klassen'>zurück zu den Klassen</a>";
+	
+			}
+			else
+			{
+				$sql2="	SELECT bildungsgaenge.*				
+						FROM bildungsgaenge
+						ORDER BY bg_name";
+					
+				$result2 = mysqli_query($db, $sql2);
+				$bgs = mysqli_fetch_all($result2, MYSQLI_ASSOC);
+
+				echo "<h3>Neue Klasse anlegen</h3>";	
+					echo "<hr>";
+					echo "<form method=post>
+							<table>
+								<tr>
+									<td>Klasse:</td>
+									<td><input type='text' name='k_name' size=30></td>
+								</tr>
+								<tr>
+									<td>Bildungsgang:</td>
+									<td><select name='bg_id'>";       
+									foreach ($bgs as $bg)
+									{
+										if($bg['bg_id']==$data['bg_id'])
+										{
+											echo "<option selected value='".$bg['bg_id']."'>".$bg['bg_name']."</option>";
+										}
+										else
+										{
+											echo "<option value='".$bg['bg_id']."'>".$bg['bg_name']."</option>";
+										}
+									}
+
+					echo "			</select> </td>
+								</tr>
+							</table>
+							<input type='submit' value='Speichern'>";
+					echo "</form>";	
+			}	
+		}
 	}
 	else
 	{
@@ -161,7 +216,8 @@
 
 
 		}
-		echo "</table>";
+		echo "</table><br>";
+		echo "<a href='?page=klassen&action=add'><button type='button'>Neue Klasse</button></a>";
 	}
 ?>
 

@@ -183,19 +183,18 @@ document.addEventListener('DOMContentLoaded', function ()
 		//Action: Add
 		elseif($_GET['action']=="add")
 		{
-			if(isset($_POST['name']))
+			if(isset($_POST['p_name']))
 			{
-				$name = $_POST['name'];
-				$vname = $_POST['vname'];
-				$new_user = $_POST['new_user'];
-				$mail = $_POST['mail'];
-				$new_pass = $_POST['pass'];
+				$name = $_POST['p_name'];
+				$vname = $_POST['p_vname'];
+				$new_user = $_POST['p_user'];
+				$mail = $_POST['p_mail'];
+				$new_pass = $_POST['p_pass'];
 				$k_id = $_POST['k_id'];
 	
 				$sql = "INSERT INTO personen (k_id, p_name, p_vname, p_user, p_pass, p_mail)
 						VALUES ($k_id, '$name', '$vname', '$new_user', '$mail', '$new_pass')";
 				
-				echo $sql;
 				$res = mysqli_query($db,$sql);
 				echo "<br><br>Personen angelegt: ".mysqli_affected_rows($db)."<br>";
 				echo"<a href='?page=personen'>zurück zu den Personen</a>";
@@ -217,23 +216,23 @@ document.addEventListener('DOMContentLoaded', function ()
 							<table>
 								<tr>
 									<td>Nachname:</td>
-									<td><input type='text' name='name' size=30></td>
+									<td><input type='text' name='p_name' size=30></td>
 								</tr>
 								<tr>
 									<td>Vorname:</td>
-									<td><input type='text' name='vname' size=30></td>
+									<td><input type='text' name='p_vname' size=30></td>
 								</tr>
 								<tr>
 									<td>User:</td>
-									<td><input type='text' name='new_user' size=30></td>
+									<td><input type='text' name='p_user' size=30></td>
 								</tr>
 								<tr>
 									<td>E-Mail:</td>
-									<td><input type='text' name='mail' size=30></td>
+									<td><input type='text' name='p_mail' size=30></td>
 								</tr>
 								<tr>
 									<td>Passwort:</td>								
-									<td><input type='password' name='pass' size=30></td>								
+									<td><input type='password' name='p_pass' size=30></td>								
 								</tr>
 								<tr>
 									<td>Klasse:</td>
@@ -294,8 +293,7 @@ document.addEventListener('DOMContentLoaded', function ()
 				  	</tr>";
 		}
 		echo "</table><br>";
-
-		echo "<a href='?page=personen&action=add'>Neue Person anlegen</a>";
+		echo "<a href='?page=personen&action=add'><button type='button'>Neue Person</button></a>";
 	}
 		
 ?>
