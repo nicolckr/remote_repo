@@ -30,10 +30,10 @@ document.addEventListener('DOMContentLoaded', function ()
 
 	require_once('config/db.php');				//Fügt hier den Inhalt der Datei db.php ein
 
-	if(isset($_GET['p_id']) || isset($_GET['new_id']) && isset($_GET['action']))
+	if(isset($_GET['action']))
 	{
 		//Action: Delete
-		if($_GET['action']=="delete")
+		if($_GET['action']=="delete" and isset($_GET['p_id']))
 		{
 			$sql="delete from personen where p_id = ".$_GET['p_id'];
 			$result = mysqli_query($db, $sql);
@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', function ()
 		}
 
 		//Action: View
-		elseif($_GET['action']=="view")
+		elseif($_GET['action']=="view" and isset($_GET['p_id']))
 		{
 			$sql="SELECT * 
 				  from personen left join klassen using(k_id)
@@ -89,7 +89,7 @@ document.addEventListener('DOMContentLoaded', function ()
 		}
 
 		//Action: Edit
-		elseif($_GET['action']=="edit")
+		elseif($_GET['action']=="edit" and isset($_GET['p_id']))
 		{
 			if(isset($_POST['p_name']))
 			{
@@ -103,8 +103,8 @@ document.addEventListener('DOMContentLoaded', function ()
 				{
 					$sql.=",p_pass=md5('".$_POST['p_pass']."')";
 				}
-				$sql.="WHERE p_id=".$_GET['p_id'];
-				
+				$sql.=" WHERE p_id=".$_GET['p_id'];
+	
 				$res=mysqli_query($db,$sql);
 				echo "<br><br>Personen geändert: ".mysqli_affected_rows($db)."<br>";
 				echo"<a href='?page=personen'>zurück zu den Personen</a>";
@@ -129,7 +129,7 @@ document.addEventListener('DOMContentLoaded', function ()
 				
 
 				//Formular
-				echo "<h3> Person bearbeiten: <i> ".$data['p_vname']." ".$data['p_name']."<i></h3>";	
+				echo "<h3>Person bearbeiten: <i> ".$data['p_vname']." ".$data['p_name']."<i></h3>";	
 				echo "<hr>";
 				echo "<form method=post>
 						
@@ -192,14 +192,10 @@ document.addEventListener('DOMContentLoaded', function ()
 				$new_pass = $_POST['pass'];
 				$k_id = $_POST['k_id'];
 	
-				$query = "SELECT MAX(p_id) FROM personen";
-				$result = mysqli_query($db, $query);
-				$row = mysqli_fetch_row($result);
-				$p_id = $row[0]+1;
-	
-				$sql = "INSERT INTO personen (p_id, k_id, p_name, p_vname, p_user, p_pass, p_mail)
-						VALUES ($p_id, $k_id, $name, $vname, $new_user, $mail, $new_pass)";
+				$sql = "INSERT INTO personen (k_id, p_name, p_vname, p_user, p_pass, p_mail)
+						VALUES ($k_id, '$name', '$vname', '$new_user', '$mail', '$new_pass')";
 				
+				echo $sql;
 				$res = mysqli_query($db,$sql);
 				echo "<br><br>Personen angelegt: ".mysqli_affected_rows($db)."<br>";
 				echo"<a href='?page=personen'>zurück zu den Personen</a>";
@@ -243,7 +239,7 @@ document.addEventListener('DOMContentLoaded', function ()
 									<td>Klasse:</td>
 									<td><select name='k_id'>";       
 									foreach ($kls as $kl)
-									{
+									{	
 										if($kl['k_id']==$data['k_id'])
 										{
 											echo "<option selected value='".$kl['k_id']."'>".$kl['k_name']."</option>";
@@ -293,21 +289,15 @@ document.addEventListener('DOMContentLoaded', function ()
 						<td>
 							<a href='?page=personen&action=view&p_id=".$satz['p_id']."'><img src='icons/view.png' width=15></a>
 							<a href='?page=personen&action=edit&p_id=".$satz['p_id']."'><img src='icons/bearbeiten.png' width=15></a>
-							<a href='?page=personen&action=delete&p_id=".$satz['p_id']."'><img src='icons/loeschen.png' width=15></a>
+							<a href='?page=personen&action=delete&p_id=".$satz['p_id']."' onclick =\"return confirm('Dieser Datensatz wird gelöscht!');\"><img src='icons/loeschen.png' width=15></a>
 						</td>
 				  	</tr>";
 		}
 		echo "</table><br>";
-		
-		//Die höchste ID aus 'personen' abfragen
-		$query = "SELECT MAX(p_id) FROM personen";
-		$result = mysqli_query($db, $query);
-		$row = mysqli_fetch_row($result);
-		$id = $row[0]+1;
 
-		echo "<a href='?page=personen&action=add&new_id=".$id."'>Neue Person anlegen</a>";
+		echo "<a href='?page=personen&action=add'>Neue Person anlegen</a>";
 	}
-
+		
 ?>
 
 	</body>
