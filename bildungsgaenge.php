@@ -115,10 +115,12 @@
 							<table>
 								<tr>
 									<td>Bezeichnung:</td>
-									<td><input type='text' name='bg_name' size=30></td>
+									<td><input type='text' required name='bg_name' size=30></td>
 								</tr>
-							</table>
-							<input type='submit' value='Speichern'>";
+							</table><br>
+							<input type='submit' value='Speichern'>
+							<input type='button' name='Abbrechen' value='Abbrechen' onclick=\"window.location.href='?page=bildungsgaenge'\"";
+
 					echo "</form>";	
 			}	
 		}

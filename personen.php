@@ -216,11 +216,11 @@ document.addEventListener('DOMContentLoaded', function ()
 							<table>
 								<tr>
 									<td>Nachname:</td>
-									<td><input type='text' name='p_name' size=30></td>
+									<td><input type='text' required name='p_name' size=30></td>
 								</tr>
 								<tr>
 									<td>Vorname:</td>
-									<td><input type='text' name='p_vname' size=30></td>
+									<td><input type='text' required name='p_vname' size=30></td>
 								</tr>
 								<tr>
 									<td>User:</td>
@@ -251,8 +251,10 @@ document.addEventListener('DOMContentLoaded', function ()
 
 					echo "			</select> </td>
 								</tr>
-							</table>
-							<input type='submit' value='Speichern'>";
+							</table><br>
+							<input type='submit' value='Speichern'>
+							<input type='button' name='Abbrechen' value='Abbrechen' onclick=\"window.location.href='?page=personen'\""; 
+
 					echo "</form>";	
 			}	
 		}

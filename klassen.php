@@ -92,7 +92,7 @@
 						<table>
 							<tr>
 								<td>Bezeichnung:</td>
-								<td> <input type='text' name='k_name' value='".$data['k_name']."' size=10></td>
+								<td><input type='text' name='k_name' value='".$data['k_name']."' size=10></td>
 							</tr>
 							<tr>
 								<td>Bildungsgang:</td>
@@ -147,7 +147,7 @@
 							<table>
 								<tr>
 									<td>Klasse:</td>
-									<td><input type='text' name='k_name' size=30></td>
+									<td><input type='text' required name='k_name' size=30></td>
 								</tr>
 								<tr>
 									<td>Bildungsgang:</td>
@@ -166,8 +166,10 @@
 
 					echo "			</select> </td>
 								</tr>
-							</table>
-							<input type='submit' value='Speichern'>";
+							</table><br>
+							<input type='submit' value='Speichern'>
+							<input type='button' name='Abbrechen' value='Abbrechen' onclick=\"window.location.href='?page=klassen'\"";
+
 					echo "</form>";	
 			}	
 		}
