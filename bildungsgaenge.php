@@ -89,6 +89,7 @@
 					<input id='bildungsgang' type='text' name='bg_name' value='".$satz['bg_name']."'><br><br>
 
 					<input type='submit' value='Speichern'>
+					<input type='button' name='Abbrechen' value='Abbrechen' onclick=\"window.location.href='?page=bildungsgaenge'\">
 				</form>";
 			}
 		}
@@ -119,7 +120,7 @@
 								</tr>
 							</table><br>
 							<input type='submit' value='Speichern'>
-							<input type='button' name='Abbrechen' value='Abbrechen' onclick=\"window.location.href='?page=bildungsgaenge'\"";
+							<input type='button' name='Abbrechen' value='Abbrechen' onclick=\"window.location.href='?page=bildungsgaenge'\">";
 
 					echo "</form>";	
 			}	

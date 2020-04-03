@@ -111,8 +111,9 @@
 
 				echo "			</select> </td>
 							</tr>
-						</table>
+						</table><br>
 						<input type='submit' value='Speichern'>
+						<input type='button' name='Abbrechen' value='Abbrechen' onclick=\"window.location.href='?page=klassen'\">
 					</form>";
 			}
 		}
@@ -168,7 +169,7 @@
 								</tr>
 							</table><br>
 							<input type='submit' value='Speichern'>
-							<input type='button' name='Abbrechen' value='Abbrechen' onclick=\"window.location.href='?page=klassen'\"";
+							<input type='button' name='Abbrechen' value='Abbrechen' onclick=\"window.location.href='?page=klassen'\">";
 
 					echo "</form>";	
 			}	

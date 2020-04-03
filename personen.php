@@ -7,11 +7,13 @@ document.addEventListener('DOMContentLoaded', function ()
 		{
 			document.getElementById('p_pass').type = 'text';
 			this.innerText = 'Passwort verstecken';
+			this.src = 'icons/view-not.png';
 		}
 		else
 		{
 			document.getElementById('p_pass').type = 'password';
 			this.innerText = 'Passwort anzeigen';
+			this.src = 'icons/view.png';
 		}
 	});
 });
@@ -148,12 +150,14 @@ document.addEventListener('DOMContentLoaded', function ()
 							</tr>
 							<tr>
 								<td>E-Mail:</td>
-								<td><input type='text' name='p_mail' value='".$data['p_mail']."' size=30></td>
+								<td><input type='email' name='p_mail' value='".$data['p_mail']."' size=30></td>
 							</tr>
 							<tr>
 								<td>Passwort:</td>
 								<td>
 									<input type='password' name='p_pass' id='p_pass' required autocomplete='off' minlength=8 maxlength=20 value='Dein Passwort' size=30>
+								</td>
+								<td>	
 									<button id='check' type='button'>Passwort anzeigen</button>
 								</td>
 							</tr>
@@ -174,8 +178,9 @@ document.addEventListener('DOMContentLoaded', function ()
 
 				echo "			</select></td>
 							</tr>
-						</table>
+						</table><br>
 						<input type='submit' value='Speichern'>
+						<input type='button' name='Abbrechen' value='Abbrechen' onclick=\"window.location.href='?page=personen'\">
 					</form>";
 			}
 		}
@@ -228,11 +233,18 @@ document.addEventListener('DOMContentLoaded', function ()
 								</tr>
 								<tr>
 									<td>E-Mail:</td>
-									<td><input type='text' name='p_mail' size=30></td>
+									<td><input type='email' name='p_mail' size=30></td>
 								</tr>
 								<tr>
 									<td>Passwort:</td>								
-									<td><input type='password' name='p_pass' size=30></td>								
+									<td>
+										<input type='password' name='p_pass' id='p_pass' required autocomplete='off' 
+																						 minlength=8 maxlength=20 
+																						 value='Dein Passwort' size=30>
+									</td>	
+									<td>
+										<img id='check' src='icons/view.png' width=25>
+									</td>							
 								</tr>
 								<tr>
 									<td>Klasse:</td>
@@ -253,7 +265,7 @@ document.addEventListener('DOMContentLoaded', function ()
 								</tr>
 							</table><br>
 							<input type='submit' value='Speichern'>
-							<input type='button' name='Abbrechen' value='Abbrechen' onclick=\"window.location.href='?page=personen'\""; 
+							<input type='button' name='Abbrechen' value='Abbrechen' onclick=\"window.location.href='?page=personen'\">"; 
 
 					echo "</form>";	
 			}	
@@ -299,6 +311,5 @@ document.addEventListener('DOMContentLoaded', function ()
 	}
 		
 ?>
-
 	</body>
 </html>
