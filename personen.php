@@ -31,17 +31,18 @@ document.addEventListener('DOMContentLoaded', function ()
 <?php
 
 	require_once('config/db.php');				//Fügt hier den Inhalt der Datei db.php ein
+	require_once('config/functions.php');
 
 	if(isset($_GET['action']))
 	{
 		//Action: Delete
 		if($_GET['action']=="delete" and isset($_GET['p_id']))
 		{
-			$sql="delete from personen where p_id = ".$_GET['p_id'];
+			$sql="DELETE from personen where p_id = ".$_GET['p_id'];
 			$result = mysqli_query($db, $sql);
 			header("Location: ?page=personen");
 		}
-
+		
 		//Action: View
 		elseif($_GET['action']=="view" and isset($_GET['p_id']))
 		{
@@ -51,43 +52,9 @@ document.addEventListener('DOMContentLoaded', function ()
 				  where p_id = ".$_GET['p_id'];
 				  
 			$result = mysqli_query($db, $sql);
-			
-			$satz = mysqli_fetch_array($result,MYSQLI_ASSOC);
-			
-			echo "<h2>Detailansicht der Person <b>".$satz['p_vname']." ".$satz['p_name']."</b></h1>
-			
-			<table>
-				<tr>
-					<td align=right>ID:</td>
-					<td>".$satz['p_id']."</td>
-				</tr>
-				<tr>
-					<td align=right>Name:</td>
-					<td>".$satz['p_name']."</td>
-				</tr>
-				<tr>
-					<td align=right>Vorname:</td>
-					<td>".$satz['p_vname']."</td>
-				</tr>
-				<tr>
-					<td align=right>User:</td>
-					<td>".$satz['p_user']."</td>
-				</tr>
-				<tr>
-					<td align=right>E-Mail:</td>
-					<td>".$satz['p_mail']."</td>
-				</tr>
-				<tr>
-					<td align=right>Klasse:</td>
-					<td>".$satz['k_name']."</td>
-				</tr>
-				<tr>
-					<td align=right>Bildungsgang:</td>
-					<td>".$satz['bg_name']."</td>
-				</tr>
-			</table><br><br>
+			$data = mysqli_fetch_assoc($result);
 
-			<a href='?page=personen'>Zurück zu allen Personen</a> ";
+			render_view('view', $data);
 		}
 
 		//Action: Edit
@@ -155,7 +122,9 @@ document.addEventListener('DOMContentLoaded', function ()
 							<tr>
 								<td>Passwort:</td>
 								<td>
-									<input type='password' name='p_pass' id='p_pass' required autocomplete='off' minlength=8 maxlength=20 value='Dein Passwort' size=30>
+									<input type='password' name='p_pass' id='p_pass' 	required autocomplete='off' 
+																						minlength=8 maxlength=20 
+																						value='Dein Passwort' size=30>
 								</td>
 								<td>	
 									<button id='check' type='button'>Passwort anzeigen</button>
@@ -198,12 +167,11 @@ document.addEventListener('DOMContentLoaded', function ()
 				$k_id = $_POST['k_id'];
 	
 				$sql = "INSERT INTO personen (k_id, p_name, p_vname, p_user, p_pass, p_mail)
-						VALUES ($k_id, '$name', '$vname', '$new_user', '$mail', '$new_pass')";
+						VALUES ($k_id, '$name', '$vname', '$new_user', '$new_pass', '$mail')";
 				
-				$res = mysqli_query($db,$sql);
+				$res = mysqli_query($db, $sql);
 				echo "<br><br>Personen angelegt: ".mysqli_affected_rows($db)."<br>";
 				echo"<a href='?page=personen'>zurück zu den Personen</a>";
-	
 			}
 			else
 			{
@@ -274,14 +242,14 @@ document.addEventListener('DOMContentLoaded', function ()
 	else
 	{
 		$sql = "SELECT * from personen left join klassen using(k_id) left join bildungsgaenge using(bg_id) order by p_name";
-		$result = mysqli_query($db, $sql);		//sql-Abfrage wird in die Variable $result übergeben
+		$result = mysqli_query($db, $sql);						//sql-Abfrage wird in die Variable $result übergeben
 
 		$data = mysqli_fetch_all($result,MYSQLI_ASSOC);			//alle Zeilen der Abfrage, die in $result stehen, werden als 2-dim, assoziatives Array, in die Variable $data übergeben
 
 		echo "<h1>Personen</h1>";
 
 		echo "<hr>";
-		echo "<table border=2>";						//Tabelle mit der Headerzeile
+		echo "<table border=2>";								//Tabelle mit der Headerzeile
 		echo "		<tr>
 						<th>p_name</th>
 						<th>p_vname</th>
@@ -291,7 +259,7 @@ document.addEventListener('DOMContentLoaded', function ()
 						<th>action</th>
 			  		</tr>";
 		
-		foreach($data as $satz)		//aus dem 2-dim, assoziativen Array, werden die Abfrageergebnisse aufgeteilt. Also je nachdem, welches Array (Indize) angesprochen wird. Solange die Variable $data noch ein neues Ergebnis übergibt, läuft die foreach-Schleife
+		foreach($data as $satz)									//aus dem 2-dim, assoziativen Array, werden die Abfrageergebnisse aufgeteilt. Also je nachdem, welches Array (Indize) angesprochen wird. Solange die Variable $data noch ein neues Ergebnis übergibt, läuft die foreach-Schleife
 		{
 			echo "	<tr>
 						<td>".$satz['p_name']."</td>

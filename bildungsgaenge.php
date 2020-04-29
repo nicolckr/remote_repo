@@ -30,37 +30,7 @@
 			$result = mysqli_query($db, $sql);
 			$data = mysqli_fetch_all($result,MYSQLI_ASSOC);
 
-			echo "<h2>Detailansicht zum Bildungsgang <b>".$data[0]['bg_name']."</b></h2>
-			
-			<table>
-				<tr>
-					<td>Bildungsgang:</td>
-					<td><b>".$data[0]['bg_name']."</b></td>
-				</tr>
-				<tr>
-					<td align=right><u>Klassen:</u></td>
-					<td></td>
-				</tr>
-				<tr>";
-						
-				foreach($data as $satz)
-				{
-					echo "
-						<td align=right>".$satz['k_name']."</td>
-					</tr>";
-				}
-
-				echo "</table><br><br>
-			
-				<a href='?page=bildungsgaenge'>Zurück zu allen Bildungsgaengen</a>";
-
-			/*
-			while($satz = mysqli_fetch_array($result, MYSQLI_ASSOC))
-			{
-				echo $satz['k_name'];
-			}
-			echo"<br>";
-			*/
+			render_view('view', $data);
 		}
 		else if($_GET['action']=="edit" and isset($_GET['bg_id']))
 		{

@@ -8,6 +8,7 @@
 <?php
 
 	require_once('config/db.php');				//Fügt hier den Inhalt der Datei db.php ein
+	require_once('config/functions.php');
 
 	if(isset($_GET['action']))
 	{
@@ -27,30 +28,9 @@
 				  where k_id = ".$_GET['k_id'];
 
 			$result = mysqli_query($db, $sql);
-			$satz = mysqli_fetch_array($result,MYSQLI_ASSOC);
+			$data = mysqli_fetch_assoc($result);
 
-			echo "<h2>Detailansicht zur Klasse <b>".$satz['k_name']."</b></h1>
-			
-			<table>
-				<tr>
-					<td align=right>Klasse:</td>
-					<td><b>".$satz['k_name']."</b></td>
-				</tr>
-				<tr>
-					<td align=right>Personen:</td>
-					<td>".$satz['p_vname']." ".$satz['p_name']."</td>
-				</tr>
-			</table><br><br>
-			
-			<a href='?page=klassen'>Zurück zu allen Klassen</a>";
-			
-			/*
-			while($satz = mysqli_fetch_array($result, MYSQLI_ASSOC))
-			{
-				echo $satz['k_name'];
-			}
-			echo"<br>";
-			*/
+			render_view('view', $data);
 		}
 		elseif($_GET['action']=="edit" and isset($_GET['k_id']))
 		{
