@@ -12,12 +12,12 @@
     <tr>
 
     <?php      
-    foreach($data as $satz)
-    {
-        echo "
-            <td align=right>".$satz['k_name']."</td>
-        </tr>";
-    }
+        foreach($data as $satz)
+        {
+            echo "
+                <td align=right>".$satz['k_name']."</td>
+            </tr>";
+        }
     ?>
 
 </table><br><br>

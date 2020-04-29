@@ -28,7 +28,7 @@
 				  where k_id = ".$_GET['k_id'];
 
 			$result = mysqli_query($db, $sql);
-			$data = mysqli_fetch_assoc($result);
+			$data = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
 			render_view('view', $data);
 		}

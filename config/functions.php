@@ -3,7 +3,7 @@
     {
         //global $page;
         $pfad = "./views/klassen/$view.php";
-        echo $pfad;
+        //echo $pfad;
         require_once($pfad);
     }
 ?>
