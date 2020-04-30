@@ -1,9 +1,8 @@
 <?php
-    function render_view($view, $data=null)
+    function render_view($view, $control, $data=null)
     {
-        //global $page;
-        $pfad = "./views/klassen/$view.php";
-        //echo $pfad;
+        global $page;
+        $pfad = "../$control/$page/$view.php";
         require_once($pfad);
     }
 ?>

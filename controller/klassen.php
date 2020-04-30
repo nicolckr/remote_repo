@@ -1,0 +1,109 @@
+<html>
+	<head>
+		<link rel="stylesheet" href="../css/formate.css">
+	</head>
+	
+	<body>
+
+<?php
+
+	require_once('../config/db.php');				//Fügt hier den Inhalt der Datei db.php ein
+	require_once('../config/functions.php');
+
+	if(isset($_GET['action']))
+	{
+		//echo $_GET['k_id'];
+		//echo $_GET['action'];
+		if($_GET['action']=="delete" and isset($_GET['k_id']))
+		{
+			$sql="delete from klassen where k_id = ".$_GET['k_id'];
+			//echo "<br>".$sql;
+			$result = mysqli_query($db, $sql);
+			header("Location: ?page=klassen");
+		}
+		else if ($_GET['action']=="view" and isset($_GET['k_id']))
+		{
+			$sql="SELECT *
+				  from klassen left join personen using(k_id)
+				  where k_id = ".$_GET['k_id'];
+
+			$result = mysqli_query($db, $sql);
+			$data = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
+			render_view('view', 'views', $data);
+		}
+		elseif($_GET['action']=="edit" and isset($_GET['k_id']))
+		{
+			if(isset($_POST['k_name']))
+			{
+				$sql="UPDATE klassen
+					    SET k_name='".$_POST['k_name']."',
+					      	bg_id ='".$_POST['bg_id']."'
+					  WHERE k_id=".$_GET['k_id'];
+
+				$res=mysqli_query($db,$sql);
+				echo "<br><br>Klassen geändert: ".mysqli_affected_rows($db)."<br>";
+				echo"<a href='?page=klassen'>zurück zu den Klassen</a>";
+			}
+			else
+			{
+				//SQL-Abfragen
+				$sql="	SELECT klassen.*				
+						FROM klassen				
+						WHERE k_id = ".$_GET['k_id'];
+				
+				$result = mysqli_query($db, $sql);
+				$data = mysqli_fetch_assoc($result);
+				
+
+				$sql2="	SELECT bildungsgaenge.*				
+						FROM bildungsgaenge
+						ORDER BY bg_name";
+				
+				$result2 = mysqli_query($db, $sql2);
+				$bgs = mysqli_fetch_all($result2, MYSQLI_ASSOC); 
+
+				//$data[]=$bgs;
+				render_view('update', 'views', $data);			
+			}
+		}
+
+		elseif($_GET['action']=="add")
+		{
+			if(isset($_POST['k_name']))
+			{
+				$name = $_POST['k_name'];
+				$bg_id = $_POST['bg_id'];
+	
+				$sql = "INSERT INTO klassen (bg_id, k_name)
+						VALUES ($bg_id, '$name')";
+				
+				$res = mysqli_query($db,$sql);
+				echo "<br><br>Klasse angelegt: ".mysqli_affected_rows($db)."<br>";
+				echo"<a href='?page=klassen'>zurück zu den Klassen</a>";
+	
+			}
+			else
+			{
+				$sql2="	SELECT bildungsgaenge.*				
+						FROM bildungsgaenge
+						ORDER BY bg_name";
+					
+				$result2 = mysqli_query($db, $sql2);
+				$data = mysqli_fetch_all($result2, MYSQLI_ASSOC);
+
+				render_view('create', 'views', $data);
+			}	
+		}
+	}
+	else
+	{
+		$result = mysqli_query($db, "SELECT * from klassen left join bildungsgaenge using(bg_id) order by k_name");		//sql-Abfrage wird in die Variable $result übergeben
+		$data = mysqli_fetch_all($result,MYSQLI_ASSOC);			//alle Zeilen der Abfrage, die in $result stehen, werden als 2-dim, assoziatives Array, in die Variable $data übergeben
+
+		render_view('index', 'views', $data);
+	}
+?>
+
+	</body>
+</html>
