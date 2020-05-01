@@ -7,13 +7,13 @@ document.addEventListener('DOMContentLoaded', function ()
 		{
 			document.getElementById('p_pass').type = 'text';
 			this.innerText = 'Passwort verstecken';
-			this.src = '../icons/view-not.png';
+			this.src = 'icons/view-not.png';
 		}
 		else
 		{
 			document.getElementById('p_pass').type = 'password';
 			this.innerText = 'Passwort anzeigen';
-			this.src = '../icons/view.png';
+			this.src = 'icons/view.png';
 		}
 	});
 });
@@ -23,15 +23,15 @@ document.addEventListener('DOMContentLoaded', function ()
 <html>
 	<head>
 		<meta charset="utf-8">
-		<link rel="stylesheet" href="../css/formate.css">
+		<link rel="stylesheet" href="css/formate.css">
 	</head>
 	
 	<body>
 
 <?php
 
-	require_once('../config/db.php');				//Fügt hier den Inhalt der Datei db.php ein
-	require_once('../config/functions.php');
+	require_once('config/db.php');				//Fügt hier den Inhalt der Datei db.php ein
+	require_once('config/functions.php');
 
 	if(isset($_GET['action']))
 	{

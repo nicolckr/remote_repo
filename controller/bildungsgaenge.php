@@ -1,15 +1,15 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<link rel="stylesheet" href="../css/formate.css">
+		<link rel="stylesheet" href="css/formate.css">
 	</head>
 	
 	<body>
 
 <?php
 
-	require_once('../config/db.php');
-	require_once('../config/functions.php');
+	require_once('config/db.php');
+	require_once('config/functions.php');
 
 	if(isset($_GET['action']))
 	{

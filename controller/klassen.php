@@ -1,14 +1,14 @@
 <html>
 	<head>
-		<link rel="stylesheet" href="../css/formate.css">
+		<link rel="stylesheet" href="css/formate.css">
 	</head>
 	
 	<body>
 
 <?php
 
-	require_once('../config/db.php');				//Fügt hier den Inhalt der Datei db.php ein
-	require_once('../config/functions.php');
+	require_once('config/db.php');				//Fügt hier den Inhalt der Datei db.php ein
+	require_once('config/functions.php');
 
 	if(isset($_GET['action']))
 	{

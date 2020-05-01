@@ -1,7 +1,7 @@
 <!-- Requiring -->
 <?php
-    require_once('../config/db.php');
-    require_once('../config/functions.php');
+    require_once('config/db.php');
+    require_once('config/functions.php');
 ?>
 
 <!-- HTML-Head -->
@@ -18,20 +18,20 @@
         $page=$_GET['page'];
         if($page=='klassen')
         {
-            require('../controller/klassen.php');
+            require('controller/klassen.php');
         }
         elseif($page=='bildungsgaenge')
         {
-            require('../controller/bildungsgaenge.php');
+            require('controller/bildungsgaenge.php');
         }
         elseif($page=='personen')
         {
-            require('../controller/personen.php');
+            require('controller/personen.php');
         }
     }
     else
     {
         $page='home';
-        require('../controller/home.php');
+        require('controller/home.php');
     }
 ?>
