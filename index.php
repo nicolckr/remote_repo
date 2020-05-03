@@ -10,9 +10,10 @@
 </head>
 
 <?php
-
+    //Menü
     render_view('site', 'controller');
     
+    //Kontrollstrunktur
     if(isset($_GET['page']))
     {
         $page=$_GET['page'];

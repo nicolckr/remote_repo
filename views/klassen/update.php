@@ -11,7 +11,7 @@
             <td><select name='bg_id'>
 
             <?php   
-                foreach ($bgs as $bg)
+                foreach ($data['bgs'] as $bg)
                 {
                     if($bg['bg_id']==$data['bg_id'])
                     {

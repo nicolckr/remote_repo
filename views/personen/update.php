@@ -34,7 +34,7 @@
             <td><select name='k_id'>
 
             <?php     
-                foreach ($kls as $kl)
+                foreach ($data['kls'] as $kl)
                 {
                     if($kl['k_id']==$data['k_id'])
                     {

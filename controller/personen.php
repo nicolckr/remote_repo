@@ -95,6 +95,7 @@ document.addEventListener('DOMContentLoaded', function ()
 				
 				$result2 = mysqli_query($db, $sql2);
 				$kls = mysqli_fetch_all($result2, MYSQLI_ASSOC); 
+				$data['kls']=$kls;
 				
 				render_view('update', 'views', $data);
 			}

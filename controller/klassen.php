@@ -62,8 +62,8 @@
 				
 				$result2 = mysqli_query($db, $sql2);
 				$bgs = mysqli_fetch_all($result2, MYSQLI_ASSOC); 
+				$data['bgs']=$bgs;
 
-				//$data[]=$bgs;
 				render_view('update', 'views', $data);			
 			}
 		}
