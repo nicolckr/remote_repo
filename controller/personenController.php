@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', function ()
 			$result = mysqli_query($db, $sql);
 			$data = mysqli_fetch_assoc($result);
 
-			render_view('view', 'views', $data);
+			render_view('view', $data);
 		}
 
 		//Action: Edit
@@ -97,7 +97,7 @@ document.addEventListener('DOMContentLoaded', function ()
 				$kls = mysqli_fetch_all($result2, MYSQLI_ASSOC); 
 				$data['kls']=$kls;
 				
-				render_view('update', 'views', $data);
+				render_view('update', $data);
 			}
 		}
 
@@ -129,7 +129,7 @@ document.addEventListener('DOMContentLoaded', function ()
 				$result2 = mysqli_query($db, $sql2);
 				$data = mysqli_fetch_all($result2, MYSQLI_ASSOC);
 
-				render_view('create', 'views', $data);
+				render_view('create', $data);
 			}	
 		}
 	}
@@ -140,7 +140,7 @@ document.addEventListener('DOMContentLoaded', function ()
 
 		$data = mysqli_fetch_all($result,MYSQLI_ASSOC);			//alle Zeilen der Abfrage, die in $result stehen, werden als 2-dim, assoziatives Array, in die Variable $data übergeben
 
-		render_view('index', 'views', $data);
+		render_view('index', $data);
 	}
 		
 ?>

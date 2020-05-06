@@ -30,7 +30,7 @@
 			$result = mysqli_query($db, $sql);
 			$data = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
-			render_view('view', 'views', $data);
+			render_view('view', $data);
 		}
 		elseif($_GET['action']=="edit" and isset($_GET['k_id']))
 		{
@@ -64,7 +64,7 @@
 				$bgs = mysqli_fetch_all($result2, MYSQLI_ASSOC); 
 				$data['bgs']=$bgs;
 
-				render_view('update', 'views', $data);			
+				render_view('update', $data);			
 			}
 		}
 
@@ -92,7 +92,7 @@
 				$result2 = mysqli_query($db, $sql2);
 				$data = mysqli_fetch_all($result2, MYSQLI_ASSOC);
 
-				render_view('create', 'views', $data);
+				render_view('create', $data);
 			}	
 		}
 	}
@@ -101,7 +101,7 @@
 		$result = mysqli_query($db, "SELECT * from klassen left join bildungsgaenge using(bg_id) order by k_name");		//sql-Abfrage wird in die Variable $result übergeben
 		$data = mysqli_fetch_all($result,MYSQLI_ASSOC);			//alle Zeilen der Abfrage, die in $result stehen, werden als 2-dim, assoziatives Array, in die Variable $data übergeben
 
-		render_view('index', 'views', $data);
+		render_view('index', $data);
 	}
 ?>
 

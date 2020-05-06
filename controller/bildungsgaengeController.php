@@ -31,7 +31,7 @@
 			$result = mysqli_query($db, $sql);
 			$data = mysqli_fetch_all($result,MYSQLI_ASSOC);
 
-			render_view('view', 'views', $data);
+			render_view('view', $data);
 		}
 		else if($_GET['action']=="edit" and isset($_GET['bg_id']))
 		{
@@ -52,7 +52,7 @@
 				$result = mysqli_query($db, $sql);
 				$data = mysqli_fetch_array($result,MYSQLI_ASSOC);
 
-				render_view('update', 'views', $data);
+				render_view('update', $data);
 			}
 		}
 
@@ -72,7 +72,7 @@
 			}
 			else
 			{
-				render_view('create', 'views');
+				render_view('create');
 			}	
 		}
 	}
@@ -81,7 +81,7 @@
 		$result = mysqli_query($db, "SELECT * from bildungsgaenge order by bg_id");
 		$data = mysqli_fetch_all($result,MYSQLI_ASSOC);
 
-		render_view('index', 'views', $data);
+		render_view('index', $data);
 	}
 ?>
 	</body>
