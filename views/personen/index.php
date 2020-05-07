@@ -1,6 +1,6 @@
-<h1>Personen</h1>
-<hr>
-<table border="2">								
+<div class="head">Personen</div>
+
+<table class="index" border="1">								
     <tr>
         <th>p_name</th>
         <th>p_vname</th>
@@ -29,5 +29,6 @@
     <?php
         }
     ?>
-</table><br>
-<a href='?page=personen&action=add'><button type='button'>Neue Person</button></a>
+</table>
+
+<div class="new"><a href='?page=personen&action=add'><button type='button'>Neue Person</button></a></div>

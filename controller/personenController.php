@@ -18,16 +18,8 @@ document.addEventListener('DOMContentLoaded', function ()
 	});
 });
 </script>
-
-
-<html>
-	<head>
-		<meta charset="utf-8">
-		<link rel="stylesheet" href="css/formate.css">
-	</head>
 	
-	<body>
-
+<body>
 <?php
 
 	require_once('config/db.php');				//Fügt hier den Inhalt der Datei db.php ein
@@ -75,8 +67,8 @@ document.addEventListener('DOMContentLoaded', function ()
 				$sql.=" WHERE p_id=".$_GET['p_id'];
 	
 				$res=mysqli_query($db,$sql);
-				echo "<br><br>Personen geändert: ".mysqli_affected_rows($db)."<br>";
-				echo"<a href='?page=personen'>zurück zu den Personen</a>";
+				echo"<div class=affected>Personen geändert: ".mysqli_affected_rows($db);
+				echo"<br><a href='?page=personen'>zurück zu den Personen</a></div>";
 			}
 			else
 			{
@@ -117,8 +109,8 @@ document.addEventListener('DOMContentLoaded', function ()
 						VALUES ($k_id, '$name', '$vname', '$new_user', '$new_pass', '$mail')";
 				
 				$res = mysqli_query($db, $sql);
-				echo "<br><br>Personen angelegt: ".mysqli_affected_rows($db)."<br>";
-				echo"<a href='?page=personen'>zurück zu den Personen</a>";
+				echo"<div class=affected>Personen angelegt: ".mysqli_affected_rows($db);
+				echo"<br><a href='?page=personen'>zurück zu den Personen</a></div>";
 			}
 			else
 			{
@@ -136,13 +128,12 @@ document.addEventListener('DOMContentLoaded', function ()
 	else
 	{
 		$sql = "SELECT * from personen left join klassen using(k_id) left join bildungsgaenge using(bg_id) order by p_name";
-		$result = mysqli_query($db, $sql);						//sql-Abfrage wird in die Variable $result übergeben
+		$result = mysqli_query($db, $sql);						
 
-		$data = mysqli_fetch_all($result,MYSQLI_ASSOC);			//alle Zeilen der Abfrage, die in $result stehen, werden als 2-dim, assoziatives Array, in die Variable $data übergeben
+		$data = mysqli_fetch_all($result,MYSQLI_ASSOC);			
 
 		render_view('index', $data);
 	}
 		
 ?>
-	</body>
-</html>
+</body>

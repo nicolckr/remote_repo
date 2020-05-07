@@ -1,11 +1,4 @@
-<html>
-	<head>
-		<meta charset="utf-8">
-		<link rel="stylesheet" href="css/formate.css">
-	</head>
-	
-	<body>
-
+<body>
 <?php
 
 	require_once('config/db.php');
@@ -25,8 +18,8 @@
 		else if ($_GET['action']=="view" and isset($_GET['bg_id']))
 		{
 			$sql="SELECT *
-				  from bildungsgaenge left join klassen using(bg_id)
-				  where bg_id = ".$_GET['bg_id'];
+				from bildungsgaenge left join klassen using(bg_id)
+				where bg_id = ".$_GET['bg_id'];
 
 			$result = mysqli_query($db, $sql);
 			$data = mysqli_fetch_all($result,MYSQLI_ASSOC);
@@ -43,8 +36,8 @@
 
 				$res = mysqli_query($db, $sql);
 
-				echo "<br><br>Bildungsgänge geändert: ".mysqli_affected_rows($db)."<br>";
-				echo "<a href='?page=bildungsgaenge'>Zurück zu den Bildungsgängen</a>";
+				echo"<div class=affected>Bildungsgänge geändert: ".mysqli_affected_rows($db);
+				echo"<br><a href='?page=bildungsgaenge'>Zurück zu den Bildungsgängen</a></div>";
 			}
 			else
 			{
@@ -66,8 +59,8 @@
 						VALUES ('$name')";
 				
 				$res = mysqli_query($db,$sql);
-				echo "<br><br>Bildungsgang angelegt: ".mysqli_affected_rows($db)."<br>";
-				echo"<a href='?page=bildungsgaenge'>zurück zu den Bildungsgängen</a>";
+				echo"<div class=affected>Bildungsgang angelegt: ".mysqli_affected_rows($db);
+				echo"<br><a href='?page=bildungsgaenge'>zurück zu den Bildungsgängen</a></div>";
 	
 			}
 			else
@@ -84,5 +77,4 @@
 		render_view('index', $data);
 	}
 ?>
-	</body>
-</html>
+</body>

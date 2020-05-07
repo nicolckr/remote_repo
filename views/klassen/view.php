@@ -1,24 +1,26 @@
-<h2>Detailansicht zur Klasse <b><?=$data[0]['k_name']?></b></h1>
+<div class="head">Detailansicht zur Klasse <b><?=$data[0]['k_name']?></b></div>
 			
 <table>
     <tr>
-        <td align="right">Klasse:</td>
-        <td><b><?=$data[0]['k_name']?></b></td>
+        <td class="info">Klasse:</td>
+        <td class="inhalt"><?=$data[0]['k_name']?></td>
     </tr>
     <tr>
-        <td align="right"><u>Personen:</u></td>
-    </tr>
-    <tr>
+        <td class="info">Personen:</td>
+    
 
     <?php      
         foreach($data as $satz)
         {
             echo "
-                <td align=right>".$satz['p_vname']." ".$satz['p_name']."</td>
-            </tr>";
+                <td class=inhalt>".$satz['p_vname']." ".$satz['p_name']."</td>
+            </tr>
+            <tr>
+                <td></td>";
         }
     ?>
+</table>
 
-</table><br><br>
-
-<a href='?page=klassen'>Zurück zu allen Klassen</a>
+<div class="auswahl">
+    <a href='?page=klassen'>Zurück zu allen Klassen</a>
+</div>

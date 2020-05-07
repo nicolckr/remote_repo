@@ -7,16 +7,19 @@
 <!-- HTML-Head -->
 <head>
     <meta http-equiv="Content-Type" content="text/html" charset="utf-8">  <!-- Sonderzeichen: ä,ü,ö -->
+    <link rel="stylesheet" href="css/formate.css">
 </head>
 
-<h1>Bücherbörse</h1>
-<a href="?site=home">Home</a>
-<a href="?site=impressum">Impressum</a>
-<a href="?page=klassen">Klassen</a>
-<a href="?page=bildungsgaenge">Bildungsgänge</a>
-<a href="?page=personen">Personen</a>
-<hr>
+<ul class="topnav">
+    <li><a class="active" href="?site=home">Home</a></li>
+    <li><a href="?page=klassen">Klassen</a></li>
+    <li><a href="?page=bildungsgaenge">Bildungsgänge</a></li>
+    <li><a href="?page=personen">Personen</a></li>
+    <li style="float:right"><a href="?site=impressum">Impressum</a></li>
+</ul>
 
 <?php
     require_once('controller/siteController.php');
-?>
+?>  
+
+

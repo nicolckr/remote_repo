@@ -1,14 +1,14 @@
-<h3>Neue Klasse anlegen</h3>	
-<hr>
+<div class="head">Neue Klasse anlegen</div>	
+
 <form method=post>
     <table>
         <tr>
-            <td>Klasse:</td>
-            <td><input type='text' required name='k_name' size=30></td>
+            <td class="info">Klasse:</td>
+            <td class="inhalt"><input type='text' required name='k_name' size=30></td>
         </tr>
         <tr>
-            <td>Bildungsgang:</td>
-            <td><select name='bg_id'>
+            <td class="info">Bildungsgang:</td>
+            <td class="inhalt"inhalt><select name='bg_id'>
 
             <?php  
                 foreach ($data as $bg)
@@ -26,8 +26,10 @@
 
             </select> </td>
         </tr>
-    </table><br>
-    <input type='submit' value='Speichern'>
-    <input type='button' name='Abbrechen' value='Abbrechen' onclick="window.location.href='?page=klassen'">
+    </table>
 
+    <div class="auswahl">
+        <input type='submit' value='Speichern'>
+        <input type='button' name='Abbrechen' value='Abbrechen' onclick="window.location.href='?page=klassen'">
+    </div>
 </form>

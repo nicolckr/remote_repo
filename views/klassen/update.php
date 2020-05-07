@@ -1,14 +1,14 @@
-<h3>Klasse bearbeiten: <i> <?=$data['k_name']?><i></h3>	
-<hr>
+<div class="head">Klasse bearbeiten: <b><?=$data['k_name']?><b></div>	
+
 <form method=post>
     <table>
         <tr>
-            <td>Bezeichnung:</td>
-            <td><input type='text' name='k_name' value='<?=$data['k_name']?>' size=10></td>
+            <td class="info">Bezeichnung:</td>
+            <td class="inhalt"><input type='text' name='k_name' value='<?=$data['k_name']?>' size=10></td>
         </tr>
         <tr>
-            <td>Bildungsgang:</td>
-            <td><select name='bg_id'>
+            <td class="info">Bildungsgang:</td>
+            <td class="inhalt"><select name='bg_id'>
 
             <?php   
                 foreach ($data['bgs'] as $bg)
@@ -26,7 +26,9 @@
 
             </select> </td>
         </tr>
-    </table><br>
-    <input type='submit' value='Speichern'>
-    <input type='button' name='Abbrechen' value='Abbrechen' onclick="window.location.href='?page=klassen'">
+    </table>
+    <div class="auswahl">
+        <input type='submit' value='Speichern'>
+        <input type='button' name='Abbrechen' value='Abbrechen' onclick="window.location.href='?page=klassen'">
+    </div>
 </form>

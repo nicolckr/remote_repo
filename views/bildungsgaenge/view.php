@@ -1,25 +1,27 @@
-<h2>Detailansicht zum Bildungsgang <b><?=$data[0]['bg_name']?></b></h2>
+<div class="head">Detailansicht zum Bildungsgang <b><?=$data[0]['bg_name']?></b></div>
 			
 <table>
     <tr>
-        <td>Bildungsgang:</td>
-        <td><b><?=$data[0]['bg_name']?></b></td>
+        <td class="info">Bildungsgang:</td>
+        <td class="inhalt"><u><?=$data[0]['bg_name']?></u></td>
     </tr>
     <tr>
-        <td align=right><u>Klassen:</u></td>
-        <td></td>
-    </tr>
-    <tr>
+        <td class="info">Klassen:</td>
+        
+    
 
     <?php      
         foreach($data as $satz)
         {
             echo "
-                <td align=right>".$satz['k_name']."</td>
-            </tr>";
+                <td class=inhalt>".$satz['k_name']."</td>
+            </tr>
+            <tr>
+                <td></td>";
         }
     ?>
+</table>
 
-</table><br><br>
-
-<a href='?page=bildungsgaenge'>Zurück zu allen Bildungsgaengen</a>
+<div class="auswahl">
+    <a href='?page=bildungsgaenge'>Zurück zu allen Bildungsgaengen</a>
+</div>

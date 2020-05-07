@@ -1,9 +1,19 @@
-<h2>Bildungsgang bearbeiten: <i><?=$data['bg_name']?></i></h2>
+<div class="head">Bildungsgang bearbeiten: <b><?=$data['bg_name']?></b></div>
 
 <form method='POST'>
-    <label for='bildungsgang'>Bildungsgang</label>
-    <input id='bildungsgang' type='text' name='bg_name' value='<?=$data['bg_name']?>'><br><br>
+    <table>
+        <tr>
+            <td class="info">
+                <label for='bildungsgang'>Bildungsgang:</label>
+            </td>
+            <td class="inhalt">
+                <input id='bildungsgang' type='text' name='bg_name' value='<?=$data['bg_name']?>'>
+            </td>
+        </tr>
+    </table>
 
-    <input type='submit' value='Speichern'>
-    <input type='button' name='Abbrechen' value='Abbrechen' onclick="window.location.href='?page=bildungsgaenge'">
+    <div class="auswahl">
+        <input type='submit' value='Speichern'>
+        <input type='button' name='Abbrechen' value='Abbrechen' onclick="window.location.href='?page=bildungsgaenge'">
+    </div>
 </form>

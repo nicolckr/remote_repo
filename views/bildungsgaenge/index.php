@@ -1,6 +1,6 @@
-<h1>Bildungsgänge</h1>
-<hr>
-<table border="2">
+<div class="head">Bildungsgänge</div>
+
+<table class="index" border="1">
     <tr>
         <th>bg_id</th>
         <th>bg_name</th>
@@ -25,6 +25,6 @@
     <?php
         }
     ?>
-</table><br>
+</table>
 
-<a href='?page=bildungsgaenge&action=add'><button type='button'>Neuer Bildungsgang</button></a>
+<div class="new"><a href='?page=bildungsgaenge&action=add'><button type='button'>Neuer Bildungsgang</button></a></div>

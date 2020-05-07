@@ -1,34 +1,36 @@
-<h2>Detailansicht der Person <b><?=$data['p_vname'] .$data['p_name']?></b></h1>
+<div class="head">Detailansicht zu <b><?=$data['p_vname']. " " .$data['p_name']?></b></div>
 			
-<table>
+<table class="view">
     <tr>
-        <td align=right>ID:</td>
-        <td><?=$data['p_id']?></td>
+        <td class="info">ID:</td>
+        <td class="inhalt"><?=$data['p_id']?></td>
     </tr>
     <tr>
-        <td align=right>Name:</td>
-        <td><?=$data['p_name']?></td>
+        <td class="info">Name:</td>
+        <td class="inhalt"><?=$data['p_name']?></td>
     </tr>
     <tr>
-        <td align=right>Vorname:</td>
-        <td><?=$data['p_vname']?></td>
+        <td class="info">Vorname:</td>
+        <td class="inhalt"><?=$data['p_vname']?></td>
     </tr>
     <tr>
-        <td align=right>User:</td>
-        <td><?=$data['p_user']?></td>
+        <td class="info">User:</td>
+        <td class="inhalt"><?=$data['p_user']?></td>
     </tr>
     <tr>
-        <td align=right>E-Mail:</td>
-        <td><?=$data['p_mail']?></td>
+        <td class="info">E-Mail:</td>
+        <td class="inhalt"><?=$data['p_mail']?></td>
     </tr>
     <tr>
-        <td align=right>Klasse:</td>
-        <td><?=$data['k_name']?></td>
+        <td class="info">Klasse:</td>
+        <td class="inhalt"><?=$data['k_name']?></td>
     </tr>
     <tr>
-        <td align=right>Bildungsgang:</td>
-        <td><?=$data['bg_name']?></td>
+        <td class="info">Bildungsgang:</td>
+        <td class="inhalt"><?=$data['bg_name']?></td>
     </tr>
-</table><br><br>
+</table>
 
-<a href='?page=personen'>Zurück zu allen Personen</a> 
+<div class="auswahl">
+    <a href='?page=personen'><br>Zurück zu allen Personen</a>
+</div>
