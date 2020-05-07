@@ -1,4 +1,4 @@
-<h1>Klassen und Bildungsgang</h1>
+<h1>Klassen</h1>
 
 		<hr>
 			<table border="2">						

@@ -9,29 +9,14 @@
     <meta http-equiv="Content-Type" content="text/html" charset="utf-8">  <!-- Sonderzeichen: ä,ü,ö -->
 </head>
 
+<h1>Bücherbörse</h1>
+<a href="?site=home">Home</a>
+<a href="?site=impressum">Impressum</a>
+<a href="?page=klassen">Klassen</a>
+<a href="?page=bildungsgaenge">Bildungsgänge</a>
+<a href="?page=personen">Personen</a>
+<hr>
+
 <?php
-    //Menü
-    render_view('impressum');
-    
-    //Kontrollstrunktur
-    if(isset($_GET['page']))
-    {
-        $page=$_GET['page'];
-        if($page=='klassen')
-        {
-            require('controller/klassenController.php');
-        }
-        elseif($page=='bildungsgaenge')
-        {
-            require('controller/bildungsgaengeController.php');
-        }
-        elseif($page=='personen')
-        {
-            require('controller/personenController.php');
-        }
-    }
-    else
-    {
-        require('controller/siteController.php');
-    }
+    require_once('controller/siteController.php');
 ?>
