@@ -18,7 +18,8 @@
 		else if ($_GET['action']=="view" and isset($_GET['bg_id']))
 		{
 			$sql="SELECT *
-				from bildungsgaenge left join klassen using(bg_id)
+				from bildungsgaenge 
+				left join klassen using(bg_id)
 				where bg_id = ".$_GET['bg_id'];
 
 			$result = mysqli_query($db, $sql);

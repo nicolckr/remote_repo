@@ -66,6 +66,9 @@ li a.active{
 	text-align: center;
 	margin-top: 60px;
 }
+.block{
+	text-align: justify;
+}
 
 
 /*div info und inhalt*/

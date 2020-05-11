@@ -1,5 +1,6 @@
-<h1>Home</h1>
+<h1>Willkommen zu Ihrer Bücherbörse!</h1>
 
+<div class="block">
 <p>
 	Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
 	tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At 
@@ -34,3 +35,4 @@
 	Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet 
 	doming id quod mazim placerat facer
 </p>
+</div>
