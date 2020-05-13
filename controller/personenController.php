@@ -102,7 +102,7 @@ document.addEventListener('DOMContentLoaded', function ()
 				$vname = $_POST['p_vname'];
 				$new_user = $_POST['p_user'];
 				$mail = $_POST['p_mail'];
-				$new_pass = $_POST['p_pass'];
+				$new_pass = md5($_POST['p_pass']);
 				$k_id = $_POST['k_id'];
 	
 				$sql = "INSERT INTO personen (k_id, p_name, p_vname, p_user, p_pass, p_mail)
