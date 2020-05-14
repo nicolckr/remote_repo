@@ -1,68 +1,52 @@
 <body>
 <?php
 
-	require_once('config/db.php');
-	require_once('config/functions.php');
+	require_once('models/bildungsgaengeModel.php');
 
 	if(isset($_GET['action']))
 	{
-		//echo $_GET['bg_id'];
-		//echo $_GET['action'];
 		if($_GET['action']=="delete" and isset($_GET['bg_id']))
 		{
-			$sql="DELETE from bildungsgaenge where bg_id = ".$_GET['bg_id'];
-			//echo $sql;
-			$result = mysqli_query($db, $sql);
-			header("Location: ?page=bildungsgaenge");
+			bildungsgaenge_delete_one($_GET['bg_id']);
+			$status="Bildungsgänge gelöscht: ".mysqli_affected_rows($db);
+			?><script>
+				window.alert('<?=$status?>');
+				window.location = '?page=bildungsgaenge';
+			</script><?php
 		}
+
 		else if ($_GET['action']=="view" and isset($_GET['bg_id']))
 		{
-			$sql="SELECT *
-				from bildungsgaenge 
-				left join klassen using(bg_id)
-				where bg_id = ".$_GET['bg_id'];
-
-			$result = mysqli_query($db, $sql);
-			$data = mysqli_fetch_all($result,MYSQLI_ASSOC);
-
-			render_view('view', $data);
+			render_view('view', $_GET['bg_id']);
 		}
+
 		else if($_GET['action']=="edit" and isset($_GET['bg_id']))
 		{
-			if(isset($_POST['bg_name']))
+			if(count($_POST)>0)
 			{
-				$sql = "UPDATE bildungsgaenge
-						SET bg_name='".$_POST['bg_name']."'
-						WHERE bg_id = ".$_GET['bg_id'];
-
-				$res = mysqli_query($db, $sql);
-
-				echo"<div class=affected>Bildungsgänge geändert: ".mysqli_affected_rows($db);
-				echo"<br><a href='?page=bildungsgaenge'>Zurück zu den Bildungsgängen</a></div>";
+				bildungsgaenge_update_one($_GET['bg_id'],$_POST);
+				$status="Bildungsgänge geändert: ".mysqli_affected_rows($db);
+				?><script>
+					window.alert('<?=$status?>');
+					window.location = '?page=bildungsgaenge';
+				</script><?php
 			}
 			else
 			{
-				$sql = "SELECT * from bildungsgaenge where bg_id = ".$_GET['bg_id'];
-				$result = mysqli_query($db, $sql);
-				$data = mysqli_fetch_array($result,MYSQLI_ASSOC);
-
-				render_view('update', $data);
+				render_view('update', $_GET['bg_id']);
 			}
 		}
 
 		elseif($_GET['action']=="add")
 		{
-			if(isset($_POST['bg_name']))
+			if(count($_POST)>0)
 			{
-				$name = $_POST['bg_name'];
-	
-				$sql = "INSERT INTO bildungsgaenge (bg_name)
-						VALUES ('$name')";
-				
-				$res = mysqli_query($db,$sql);
-				echo"<div class=affected>Bildungsgang angelegt: ".mysqli_affected_rows($db);
-				echo"<br><a href='?page=bildungsgaenge'>zurück zu den Bildungsgängen</a></div>";
-	
+				bildungsgaenge_add_one($_POST);
+				$status="Bildungsgänge angelegt: ".mysqli_affected_rows($db);
+				?><script>
+					window.alert('<?=$status?>');
+					window.location = '?page=bildungsgaenge';
+				</script><?php
 			}
 			else
 			{
@@ -72,10 +56,7 @@
 	}
 	else
 	{
-		$result = mysqli_query($db, "SELECT * from bildungsgaenge order by bg_id");
-		$data = mysqli_fetch_all($result,MYSQLI_ASSOC);
-
-		render_view('index', $data);
+		render_view('index', $_GET['bg_id']);
 	}
 ?>
 </body>

@@ -30,5 +30,5 @@
     ?>
 </table>
 
-<div class="new"><a href='?page=klassen&action=add'><button type='button'>Neue Klasse</button></a></div>
+<div class="auswahl"><a href='?page=klassen&action=add'><button type='button'>Neue Klasse</button></a></div>
 	

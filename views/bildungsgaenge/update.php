@@ -1,3 +1,7 @@
+<?php
+    $data=bildungsgaenge_get_one($data);
+?>
+
 <div class="head">Bildungsgang bearbeiten: <b><?=$data['bg_name']?></b></div>
 
 <form method='POST'>

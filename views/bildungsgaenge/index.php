@@ -1,3 +1,7 @@
+<?php
+    $data=bildungsgaenge_get_all($data);
+?>
+
 <div class="head">Bildungsgänge</div>
 
 <table class="index" border="1">
@@ -27,4 +31,4 @@
     ?>
 </table>
 
-<div class="new"><a href='?page=bildungsgaenge&action=add'><button type='button'>Neuer Bildungsgang</button></a></div>
+<div class="auswahl"><a href='?page=bildungsgaenge&action=add'><button type='button'>Neuer Bildungsgang</button></a></div>

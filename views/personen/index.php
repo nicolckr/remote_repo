@@ -31,4 +31,4 @@
     ?>
 </table>
 
-<div class="new"><a href='?page=personen&action=add'><button type='button'>Neue Person</button></a></div>
+<div class="auswahl"><a href='?page=personen&action=add'><button type='button'>Neue Person</button></a></div>
